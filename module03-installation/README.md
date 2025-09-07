@@ -2,7 +2,7 @@
 
 ### 🔹 Minikube
 - [🚀 الموقع الرسمي لـ Minikube](https://minikube.sigs.k8s.io/docs/start/)  
-- [📖 وثائق تثبيت Minikube على MacOS](https://minikube.sigs.k8s.io/docs/start/macos/)  
+- [📖 وثائق تثبيت Minikube على MacOS](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Fx86-64%2Fstable%2Fbinary+download)  
 - [📖 وثائق تثبيت Minikube على Linux](https://minikube.sigs.k8s.io/docs/start/linux/)  
 - [📖 وثائق تثبيت Minikube على Windows](https://minikube.sigs.k8s.io/docs/start/windows/)  
 - [🎥 فيديو: What is Minikube? (YouTube)](https://www.youtube.com/watch?v=1Q3U2MJZ2hQ)  
