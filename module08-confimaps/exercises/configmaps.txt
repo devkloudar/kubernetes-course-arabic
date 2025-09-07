@@ -1,0 +1,2 @@
+APP_MODE=production
+API_URL=https://api.example.com
