@@ -253,10 +253,8 @@ kubectl delete namespace dev
 
 ### 🔹 موارد إضافية
 - <a href="https://kubernetes.io/docs/reference/kubectl/cheatsheet/" target="_blank">📖 kubectl Cheatsheet</a>  
-- <a href="https://www.youtube.com/watch?v=Be5XA1G3OfU" target="_blank">🎥 فيديو: Kubernetes Labels & Selectors Explained</a>  
-- <a href="https://www.youtube.com/watch?v=K0jR2VE0-8k" target="_blank">🎥 فيديو: Kubernetes Namespaces Simplified</a>  
 
----
+
 
 ✅ هذه المصادر ستساعدك على:  
 1. فهم دور **Labels** و **Selectors** في تنظيم وإدارة الموارد.  
