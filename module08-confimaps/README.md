@@ -16,12 +16,6 @@
 - <a href="https://kubernetes.io/docs/concepts/configuration/overview/" target="_blank">📖 أفضل الممارسات في إدارة الإعدادات</a>  
 - <a href="https://cloud.google.com/architecture/best-practices-for-kubernetes" target="_blank">📖 Google Cloud: أفضل الممارسات لإدارة ConfigMaps و Secrets</a>  
 
-### 🔹 فيديوهات تعليمية
-- <a href="https://www.youtube.com/watch?v=U0X0E0fS0jQ" target="_blank">🎥 فيديو: Kubernetes ConfigMap Explained</a>  
-- <a href="https://www.youtube.com/watch?v=fa3UuwLzY6k" target="_blank">🎥 فيديو عملي: How to use ConfigMaps in Kubernetes</a>  
-
----
-
 ✅ هذه المصادر ستساعدك على:  
 1. فهم مفهوم **ConfigMap** ولماذا نحتاجه في Kubernetes.  
 2. إنشاء ConfigMaps من ملفات أو متغيرات بيئة.  
