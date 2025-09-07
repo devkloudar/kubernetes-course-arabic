@@ -1,4 +1,4 @@
-## Video 0: نظرة عامة على الوحدة
+## نظرة عامة على الوحدة
 
 مرحباً بكم في الوحدة الحادية عشرة من دورة كوبرنيتيس. في هذه الوحدة، سنغطي أحد المفاهيم الأساسية والأكثر أهمية في كوبرنيتيس: **الـ Services**.
 
@@ -13,8 +13,8 @@
 - تطبيق عملي لأنواع الـ Services المختلفة
 
 
----
-## Video 1:  ClusterIP
+
+## ClusterIP
 
 دعنا الأن نتكلم على أول نوع من ال Services وهو ClusterIP 
 
@@ -56,9 +56,9 @@ spec:
 - واجهات API للاستخدام الداخلي فقط
 - أي خدمة لا تحتاج إلى التعريض للعالم الخارجي
 
----
 
-## Video 2:  NodePort
+
+## NodePort
 
 **NodePort** هو نوع من أنواع الـ Services 
 في كوبرنيتيس الذي يعرض تطبيقك على منفذ (port) ثابت في نطاق محدد (30000-32767) على **كل عقدة (Node)** في الكلستر. هذا يسمح بالوصول إلى الخدمة من خارج الكلستر باستخدام عنوان IP أي عقدة متبوعة برقم الـ NodePort.
@@ -257,9 +257,9 @@ kubectl delete service web-nodeport-service
 - عندما تحتاج إلى تعريض خدمة للعالم الخارجي ولكن لا يتوفر LoadBalancer
 - للوصول المباشر إلى الخدمات من خارج الكلستر
 
----
 
-## Video 3:  LoadBalancer
+
+## LoadBalancer
 
 ### ما هو LoadBalancer Service؟
 
@@ -304,82 +304,9 @@ spec:
 - للخدمات التي تحتاج إلى عنوان IP خارجي ثابت
     
 
----
 
-## Video 4: ExternalName
 
-### ما هو ExternalName Service؟
-
-- **ExternalName** هو نوع خاص من الـ Services لتعريض خدمات خارجية كخدمات داخل الكلستر
-    
-- يعمل كـ CNAME لخدمة خارجية
-- لا يستخدم selectors أو عناوين IP
-
-### كيف يعمل؟
-
-- يقوم بإنشاء DNS entry داخل الكلستر يشير إلى خدمة خارجية
-- عندما يحاول تطبيق داخل الكلستر الوصول إلى الـ Service، يتم تحويله إلى الخدمة الخارجية
-
-### مثال تكوين ExternalName:
-
-```
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-external-service
-spec:
-  type: ExternalName
-  externalName: my.database.example.com  # الخدمة الخارجية
-```
-### حالات الاستخدام:
-
-- الوصول إلى قواعد بيانات أو خدمات خارجية من داخل الكلستر
-- عند الهجرة التدريجية من خدمات خارجية إلى داخل الكلستر
-- لتبسيط تكوين الاتصال بالخدمات الخارجية
-    
-
----
-
-## Video 5: Headless Services
-
-### ما هي Headless Services؟
-
-- **Headless Services** هي خدمات لا تحتوي على عنوان IP خاص بها
-    
-- تستخدم عندما لا تحتاج إلى موازنة حمل أو عنوان IP ثابت
-- تعرض عناوين IP الـ Pods مباشرةً عبر DNS
-    
-
-### كيف تعمل؟
-
-- عند إنشاء Headless Service، يعود DNS query بقائمة عناوين IP جميع الـ Pods المتصلة
-- يتم ذلك بتعيين `clusterIP: None` في مواصفات الـ Service
-
-### مثال تكوين Headless Service:
-
-```
-apiVersion: v1
-kind: Service
-metadata:
-  name: my-headless-service
-spec:
-  clusterIP: None  # هذا ما يجعلها Headless
-  selector:
-    app: my-stateful-app
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 8080
-```
-### حالات الاستخدام:
-
-- StatefulSets حيث تحتاج كل instance إلى عنوانها الخاص
-- خدمات الاكتشاف المباشر بين الـ Pods
-- قواعد البيانات الموزعة مثل MongoDB, Cassandra, Elasticsearch
-- عندما تريد الاتصال المباشر بـ Pod معين بدلاً من موازنة الحمل
-
----
-## Video 6: العرض العملي
+##  العرض العملي
 
 
 في هذا القسم العملي، سنقوم بما يلي:
@@ -439,112 +366,6 @@ kubectl get nodes -o wide
 # اختبار الوصول من خارج الكلستر (استبدل <node-ip> بعنوان node الفعلي)
 curl http://<node-ip>:30080
 ```
-### 3. إنشاء وتجربة LoadBalancer Service (في بيئة سحابية)
-
-```
-# إنشاء LoadBalancer Service
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-loadbalancer
-spec:
-  type: LoadBalancer
-  selector:
-    app: nginx
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-EOF
-
-# انتظار توفير عنوان IP (في السحابة)
-kubectl get svc nginx-loadbalancer -w
-
-# اختبار الوصول عبر عنوان IP الخارجي
-curl http://<external-ip>
-```
-### 4. إنشاء وتجربة ExternalName Service
-
-```
-# إنشاء ExternalName Service
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Service
-metadata:
-  name: external-google
-spec:
-  type: ExternalName
-  externalName: www.google.com
-EOF
-
-# اختبار التحويل DNS
-kubectl run test-$RANDOM --rm -it --image=busybox -- /bin/sh
-nslookup external-google.default.svc.cluster.local
-```
-### 5. إنشاء وتجربة Headless Service
-
-```
-
-# إنشاء StatefulSet (لـ Headless Service المناسبة)
-kubectl apply -f - <<EOF
-apiVersion: apps/v1
-kind: StatefulSet
-metadata:
-  name: web
-spec:
-  serviceName: "nginx-headless"
-  replicas: 3
-  selector:
-    matchLabels:
-      app: nginx
-  template:
-    metadata:
-      labels:
-        app: nginx
-    spec:
-      containers:
-      - name: nginx
-        image: nginx
-        ports:
-        - containerPort: 80
-EOF
-
-# إنشاء Headless Service
-kubectl apply -f - <<EOF
-apiVersion: v1
-kind: Service
-metadata:
-  name: nginx-headless
-spec:
-  clusterIP: None
-  selector:
-    app: nginx
-  ports:
-    - protocol: TCP
-      port: 80
-      targetPort: 80
-EOF
-
-# اختبار DNS lookup للحصول على جميع عناوين الـ Pods
-kubectl run test-$RANDOM --rm -it --image=busybox -- /bin/sh
-nslookup nginx-headless.default.svc.cluster.local
-```
-### 6. مراقبة وفهم كيفية عمل الـ Services
-
-```
-
-# مشاهدة الـ iptables rules التي ينشئها kube-proxy
-sudo iptables -t nat -L | grep nginx
-
-# أو إذا كان يستخدم ipvs
-sudo ipvsadm -L
-
-# مراقبة الـ Endpoints (الـ Pods المتصلة بالـ Service)
-kubectl get endpoints
-kubectl describe svc <service-name>
-```
----
 
 ## مصادر خطة الدراسة
 
