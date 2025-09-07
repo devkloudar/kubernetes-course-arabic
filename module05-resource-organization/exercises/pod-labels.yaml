@@ -1,0 +1,13 @@
+### 🔹 1. استخدام Labels
+Labels هي مفاتيح/قيم تُستخدم لوصف الموارد وتنظيمها.
+apiVersion: v1
+kind: Pod
+metadata:
+  name: nginx-pod
+  labels:
+    app: nginx
+    env: production
+spec:
+  containers:
+    - name: nginx
+      image: nginx:latest
