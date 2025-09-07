@@ -161,35 +161,6 @@ kubectl get pvc
 # إنشاء Pod يستخدم PVC
 kubectl apply -f pv-pod.yaml
 ```
-
-### 3. استخدام Dynamic Provisioning مع StorageClass
-
-```
-# إنشاء StorageClass
-kubectl apply -f storageclass.yaml
-
-# إنشاء PVC تشير إلى StorageClass
-kubectl apply -f dynamic-pvc.yaml
-
-# سينشئ النظام PV تلقائياً
-kubectl get pv
-kubectl get pvc
-```
-### 4. استخدام CSI Driver (مثال مع AWS EBS)
-
-```
-# تثبيت AWS EBS CSI Driver (إذا لم يكن مثبتاً)
-kubectl apply -k "github.com/kubernetes-sigs/aws-ebs-csi-driver/deploy/kubernetes/overlays/stable/?ref=master"
-
-# إنشاء StorageClass باستخدام مشغل CSI
-kubectl apply -f ebs-storageclass.yaml
-
-# إنشاء PVC
-kubectl apply -f ebs-pvc.yaml
-
-# استخدام PVC في Pod
-kubectl apply -f ebs-pod.yaml
-```
 ### 5. اختبار استمرارية البيانات
 ```
 # كتابة بيانات إلى volume
