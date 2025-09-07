@@ -49,8 +49,62 @@
 - يسمح بمراقبة التحديث خطوة بخطوة.
 - يمكن تخصيص سلوكه عبر `maxSurge` و `maxUnavailable`.
 
+# أوامر مهمة تم دراستها في هذا الفصل
 
-## مصادر خطة الدراسة للفصل 7
+
+```bash
+kubectl create deployment web --image=nginx:1.25 --replicas=2
+```
+
+### تحقق من الموارد:
+
+```bash
+kubectl get deployments
+kubectl get pods -l app=web
+```
+ ### تطبيق الملف وتشغيل Deployment
+
+```bash
+kubectl apply -f deployment-nginx.yaml
+kubectl get deployments
+kubectl get pods -l app=nginx
+```
+ ### تحقق من الصورة Deployment
+
+```bash
+kubectl describe deployment nginx-deployment | grep Image:
+```
+
+```bash
+# إنشاء Deployment مبدئي
+kubectl create deployment web --image=nginx:1.25 --replicas=3
+
+# تحديث النسخة
+kubectl set image deployment/web nginx=nginx:1.26
+
+# متابعة حالة التحديث
+kubectl rollout status deployment/web
+
+# التحقق من الصورة المستخدمة
+kubectl describe deployment web | grep Image
+```
+### أوامر Rollback:
+
+```bash
+# عرض سجل الإصدارات
+kubectl rollout history deployment/web
+
+# الرجوع إلى النسخة السابقة
+kubectl rollout undo deployment/web
+```
+
+### 🔍 التحقق:
+```bash
+kubectl describe deployment web | grep Image
+```
+
+
+# مصادر خطة الدراسة للفصل 7
 
 ###  المصادر الرسمية
 
