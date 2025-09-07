@@ -1,0 +1,26 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: hostpath-example
+  labels:
+    app: log-collector
+spec:
+  containers:
+  - name: log-collector-container
+    image: alpine
+    command: ["sh", "-c"]
+    args:
+    - while true; do
+        echo "$(date) - Collecting logs from host" >> /var/log/host-app.log;
+        sleep 30;
+      done
+    volumeMounts:
+    - name: host-log-volume
+      mountPath: /var/log
+      readOnly: false
+  volumes:
+  - name: host-log-volume
+    hostPath:
+      path: /var/log
+      type: DirectoryOrCreate
+  restartPolicy: OnFailure
