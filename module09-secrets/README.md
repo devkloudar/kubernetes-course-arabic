@@ -1,8 +1,6 @@
 ## نظرة عامة على الوحدة
 
-مرحباً بكم في الوحدة التاسعة من دورة كوبرنيتيس. في هذه الوحدة، سنتعمق في موضوع بالغ الأهمية لإدارة التطبيقات والحفاظ على أمانها: **Secrets**.
-
-الـ Secrets هي كائنات في كوبرنيتيس تُستخدم لتخزين وإدارة المعلومات الحساسة مثل كلمات المرور وروابط الاتصال وقواعد البيانات ومفاتيح API والشهادات الرقمية. بدلاً من تضمين هذه المعلومات مباشرة في ملفات التكوين أو كود التطبيق، توفر كوبرنيتيس طريقة آمنة ومنفصلة لإدارتها.
+الـ Secrets هي كائنات في Kubernetes تُستخدم لتخزين وإدارة المعلومات الحساسة مثل كلمات المرور وروابط الاتصال وقواعد البيانات ومفاتيح API والشهادات الرقمية. بدلاً من تضمين هذه المعلومات مباشرة في ملفات التكوين أو كود التطبيق، توفر كوبرنيتيس طريقة آمنة ومنفصلة لإدارتها.
 
 في هذه الوحدة، سنغطي:
 
@@ -218,62 +216,6 @@ rules:
   resourceNames: ["my-secret"]
   verbs: ["get", "watch", "list"]
 ```
-### 2. استخدام CSI (Container Storage Interface) Driver للـ Secrets
-
-- توفير طريقة أكثر أماناً لحقن الـ Secrets
-- دعم التحديثات الديناميكية للـ Secrets دون إعادة تشغيل الـ Pods
-    
-```
-kind: Pod
-apiVersion: v1
-metadata:
-  name: secrets-store-inline
-spec:
-  containers:
-  - name: busybox
-    image: k8s.gcr.io/e2e-test-images/busybox:1.29
-    volumeMounts:
-    - name: secrets-store-inline
-      mountPath: "/mnt/secrets-store"
-      readOnly: true
-  volumes:
-    - name: secrets-store-inline
-      csi:
-        driver: secrets-store.csi.k8s.io
-        readOnly: true
-        volumeAttributes:
-          secretProviderClass: "my-secret-provider"
-```
-### 3. استخدام External Secrets
-
-- تخزين الـ Secrets في أنظمة خارجية متخصصة (AWS Secrets Manager, HashiCorp Vault, Azure Key Vault)
-- استخدام External Secrets Operator لمزامنة الـ Secrets مع كوبرنيتيس
-
-
-مثال لـ ExternalSecret:
-
-```
-apiVersion: external-secrets.io/v1beta1
-kind: ExternalSecret
-metadata:
-  name: database-credentials
-spec:
-  refreshInterval: 1h
-  secretStoreRef:
-    name: aws-secret-store
-    kind: SecretStore
-  target:
-    name: database-secret
-  data:
-  - secretKey: username
-    remoteRef:
-      key: /prod/database
-      property: username
-  - secretKey: password
-    remoteRef:
-      key: /prod/database
-      property: password
-```
 ### أفضل ممارسات إضافية:
 
 - تدوير الـ Secrets بشكل دوري
@@ -282,7 +224,7 @@ spec:
 - استخدام أدوات مسح الأمان للكشف عن الـ Secrets المعرضة للخطر
     
 
----
+
 
 ## العرض العملي
 
@@ -310,7 +252,7 @@ spec:
     - إنشاء أدوار RBAC للتحكم في الوصول إلى Secrets
     - استخدام Network Policies لعزل الـ Pods التي تصل إلى Secrets
 
----
+
 
 ## مصادر خطة الدراسة
 
@@ -337,6 +279,6 @@ spec:
 - تأمين تطبيق ويب باستخدام TLS Secrets
 - بناء خط أنابيب CI/CD مع إدارة آمنة للأسرار
 
----
 
-في الختام، تعتبر إدارة الأسرار بشكل آمن أحد الجوانب الحرجة في إدارة تطبيقات كوبرنيتيس. من خلال فهم المفاهيم والتقنيات التي تم تناولها في هذه الوحدة، ستتمكن من حماية البيانات الحساسة في تطبيقاتك بشكل فعال وتطبيق أفضل ممارسات الأمان في بيئة كوبرنيتيس.
+
+في الختام، تعتبر إدارة الأسرار بشكل آمن أحد الجوانب الحرجة في إدارة تطبيقات Kubernetes. من خلال فهم المفاهيم والتقنيات التي تم تناولها في هذه الوحدة، ستتمكن من حماية البيانات الحساسة في تطبيقاتك بشكل فعال وتطبيق أفضل ممارسات الأمان في بيئة Kubernetes.
