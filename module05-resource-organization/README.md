@@ -15,7 +15,7 @@
 
 
 
- ## ما هي الـ Labels؟**
+ ## ما هي الـ Labels؟
 
 - عبارة عن أزواج مفتاح/قيمة (key=value).
 - تُستخدم لتصنيف الموارد: Pods، Services، Deployments… إلخ.
