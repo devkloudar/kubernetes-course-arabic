@@ -7,6 +7,6 @@
 - [Kubernetes Components](https://kubernetes.io/docs/concepts/overview/components/)
 - [Kubernetes Clusters](https://kubernetes.io/docs/concepts/overview/working-with-objects/namespaces/)
 
-### 📺 فيديوهات تعليمية
-- [Kubernetes Explained in 15 Minutes (YouTube)](https://www.youtube.com/watch?v=X48VuDVv0do)
 
+### 📺 فيديوهات تعليمية
+- [Kubernetes Architecture](https://www.youtube.com/watch?v=PH-2FfFD2PU)
