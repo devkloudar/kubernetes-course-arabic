@@ -1,0 +1,35 @@
+# challenge.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: challenge-demo
+spec:
+  initContainers:
+  - name: create-files
+    image: busybox
+    command: ['sh', '-c']
+    args:
+      - |
+        for i in 1 2 3 4 5; do
+          echo "File $i" > /data/file-$i.txt;
+        done
+        echo "📁 Created 5 files!";
+    volumeMounts:
+    - name: data-volume
+      mountPath: /data
+
+  containers:
+  - name: file-counter
+    image: busybox
+    command: ['sh', '-c']
+    args:
+      - |
+        echo "📊 Number of files: $(ls -la /data | grep .txt | wc -l)";
+        sleep 3600;
+    volumeMounts:
+    - name: data-volume
+      mountPath: /data
+
+  volumes:
+  - name: data-volume
+    emptyDir: {}

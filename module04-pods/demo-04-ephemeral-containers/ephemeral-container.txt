@@ -1,0 +1,1 @@
+kubectl debug pod-nginx -it --image=busybox --target=nginx

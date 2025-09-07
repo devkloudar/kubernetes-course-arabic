@@ -1,0 +1,31 @@
+# simple-init.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: simple-init-demo
+spec:
+  initContainers:
+  - name: prepare-message
+    image: busybox
+    command: ['sh', '-c']
+    args:
+      - |
+        echo "Welcome to my application" > /app/welcome.txt
+        echo "Has been created on: $(date)" >> /app/welcome.txt
+        echo "The setup completed successfully!"
+    volumeMounts:
+    - name: app-data
+      mountPath: /app
+
+  containers:
+  - name: main-app
+    image: nginx:alpine
+    volumeMounts:
+    - name: app-data
+      mountPath: /usr/share/nginx/html
+    ports:
+    - containerPort: 80
+
+  volumes:
+  - name: app-data
+    emptyDir: {}

@@ -1,0 +1,22 @@
+# wait-for-service.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: wait-for-service-demo
+spec:
+  initContainers:
+  - name: wait-for-google
+    image: busybox
+    command: ['sh', '-c']
+    args:
+      - |
+        echo "⏳ waiting for Google to be reachable...";
+        until ping -c1 google.com; do
+          sleep 2;
+        done;
+        echo "✅ Google is reachable!";
+
+  containers:
+  - name: main-app
+    image: busybox
+    command: ['sleep', '3600']
