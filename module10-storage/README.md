@@ -12,7 +12,7 @@
 - مقدمة عن Container Storage Interface (CSI)
 - تطبيق عملي لأنواع التخزين المختلفة
 
----
+
 
 ## أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)
 
@@ -125,9 +125,7 @@ spec:
       - key: username
         path: my-username
 ```
----
 
----
 
 ## العرض العملي
 
@@ -174,7 +172,7 @@ kubectl apply -f pod.yaml
 kubectl exec -it pod-name -- cat /path/to/file
 # يجب أن يظهر "test data"
 ```
----
+
 
 ## مصادر خطة الدراسة
 
@@ -210,6 +208,6 @@ kubectl exec -it pod-name -- cat /path/to/file
 - تطبيق سياسات احتفاظ البيانات (Data Retention Policies)
     
 
----
+
 
 في الختام، يعد فهم أنظمة التخزين في كوبرنيتيس أمراً بالغ الأهمية لإدارة التطبيقات stateful بشكل فعال. من خلال إتقان المفاهيم والتقنيات التي تم تناولها في هذه الوحدة، ستتمكن من تصميم أنظمة تخزين قوية وموثوقة لتطبيقاتك في بيئة كوبرنيتيس.
