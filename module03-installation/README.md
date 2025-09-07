@@ -3,9 +3,8 @@
 ### 🔹 Minikube
 - [🚀 الموقع الرسمي لـ Minikube](https://minikube.sigs.k8s.io/docs/start/)  
 - [📖 وثائق تثبيت Minikube على MacOS](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fmacos%2Fx86-64%2Fstable%2Fbinary+download)  
-- [📖 وثائق تثبيت Minikube على Linux](https://minikube.sigs.k8s.io/docs/start/linux/)  
-- [📖 وثائق تثبيت Minikube على Windows](https://minikube.sigs.k8s.io/docs/start/windows/)  
-- [🎥 فيديو: What is Minikube? (YouTube)](https://www.youtube.com/watch?v=1Q3U2MJZ2hQ)  
+- [📖 وثائق تثبيت Minikube على Linux](https://minikube.sigs.k8s.io/docs/start/?arch=%2Flinux%2Fx86-64%2Fstable%2Fbinary+download)  
+- [📖 وثائق تثبيت Minikube على Windows](https://minikube.sigs.k8s.io/docs/start/?arch=%2Fwindows%2Fx86-64%2Fstable%2F.exe+download)  
 
 ### 🔹 kubectl
 - [📖 التثبيت على أنظمة التشغيل المختلفة](https://kubernetes.io/docs/tasks/tools/)  
@@ -15,7 +14,6 @@
 ### 🔹 Kubernetes Cluster 101
 - [📖 Getting Started with Kubernetes](https://kubernetes.io/docs/setup/)  
 - [📖 Running Kubernetes Locally with Minikube](https://kubernetes.io/docs/tutorials/hello-minikube/)  
-- [🎥 فيديو تعليمي: Kubernetes for Beginners (YouTube)](https://www.youtube.com/watch?v=X48VuDVv0do)  
 
 ---
 
