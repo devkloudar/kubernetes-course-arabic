@@ -14,7 +14,7 @@
 - الـ Ingress في Kubernetes هو مورد (Resource) يسمح بتحديد قواعد التوجيه (Routing Rules) للترافيك الخارجي نحو الخدمات (Services) داخل الكلاستر.
 - لكن... الـ Ingress لا يعمل وحده، بل يحتاج إلى **Ingress Controller** وهو عبارة عن تطبيق يستمع لهذه القواعد ويقوم بتطبيقها.
 - أنواع Ingress Controllers:
-  - NGINX Ingress Controller ✅
+  - NGINX Ingress Controller 
   - Traefik
   - HAProxy
   - Istio Gateway
