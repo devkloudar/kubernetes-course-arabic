@@ -1,4 +1,38 @@
+## نظرة عامة على الوحدة
 
+مرحباً بكم في الوحدة العاشرة من دورة كوبرنيتيس. في هذه الوحدة، سنغطي أحد الجوانب الأساسية لإدارة التطبيقات في الحاويات: **أنظمة التخزين المستدامة**.
+
+بينما تكون الحاويات بطبيعتها عابرة (ephemeral) وتفقد بياناتها عند إعادة التشغيل، توفر كوبرنيتيس عدة آليات لتخزين البيانات بشكل دائم ومستدام. في هذه الوحدة، سنستكشف هذه الآليات بالتفصيل.
+
+سنتعلم في هذه الوحدة:
+
+- أنواع مختلفة من وحدات التخزين (Volumes) وكيفية استخدامها
+- مفهوم Persistent Volumes و Persistent Volume Claims
+- كيفية عمل Dynamic Provisioning باستخدام StorageClass
+- مقدمة عن Container Storage Interface (CSI)
+- تطبيق عملي لأنواع التخزين المختلفة
+
+---
+
+## أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)
+
+### 1. emptyDir
+
+- حجم تخزين مؤقت ينشأ عند إنشاء الـ Pod ويُحذف عند حذف الـ Pod
+- مفيد للمشاركة المؤقتة للبيانات بين Containers في نفس الـ Pod
+- يمكن تخزين البيانات على القرص أو في الذاكرة (tmpfs)
+
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: nginx
+    name: nginx-container
+    volumeMounts:
     - mountPath: /cache
       name: cache-volume
   volumes:
@@ -92,170 +126,6 @@ spec:
         path: my-username
 ```
 ---
-
-## Persistent Volume (PV) و Persistent Volume Claim (PVC)
-
-### Persistent Volume (PV)
-
-## 📦 ما هو الـ Persistent Volume (PV)؟
-
-الـ **Persistent Volume** هو مورد تخزين في الـ Cluster تم توفيره بواسطة المسؤول (Admin). إنه مورد مستقل عن Pods له دورة حياة مستقلة.
-
-### خصائص الـ PV:
-
-- **مستقل عن الـ Pods**: يبقى موجوداً حتى بعد حذف الـ Pods
-- **يدعم أنواع تخزين متعددة**: NFS, iSCSI, Cloud Storage (EBS, Azure Disk, etc.)
-    
-- **له سعة تخزين محددة**
-    
-- **له سياسات وصول** (Access Modes) مختلفة
-    
-
-## 📋 ما هو الـ Persistent Volume Claim (PVC)؟
-
-الـ **Persistent Volume Claim** هو طلب من قبل المستخدم (User/Developer) لتخزين. يعمل كواجهة بين الـ Pod والـ PV.
-
-### خصائص الـ PVC:
-
-- **طلب للتخزين**: يحدد الحجم ونوع الوصول المطلوب
-    
-- **يربط الـ Pod بالـ PV**: من خلال الـ Volume
-    
-- **يدعم ديناميكية التوفير**: مع StorageClass
-    
-```
-apiVersion: v1
-kind: PersistentVolume
-metadata:
-  name: pv-volume
-  labels:
-    type: local
-spec:
-  storageClassName: manual
-  capacity:
-    storage: 10Gi
-  accessModes:
-    - ReadWriteOnce
-  hostPath:
-    path: "/mnt/data"
-```
-### Persistent Volume Claim (PVC)
-
-- طلب من المستخدم لتخزين مستدام
-- يشبه "طلب" لموارد التخزين من الـ PVs المتاحة
-- يربط الـ PVC مع الـ Pod لاستخدام التخزين المستدام
-```
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: pv-claim
-spec:
-  storageClassName: manual
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 3Gi
-```
-### ربط PVC مع Pod
-
-```
-apiVersion: v1
-kind: Pod
-metadata:
-  name: pv-pod
-spec:
-  containers:
-  - name: pv-container
-    image: nginx
-    volumeMounts:
-    - mountPath: "/usr/share/nginx/html"
-      name: pv-storage
-  volumes:
-  - name: pv-storage
-    persistentVolumeClaim:
-      claimName: pv-claim  # اسم الـ PVC
-```
----
-
-## StorageClass و Dynamic Provisioning
-
-### StorageClass
-
-- يصف "فئات" التخزين المتاحة في الكلستر
-- يسمح بإدارة ديناميكية للـ PVs
-- كل موفر تخزين (AWS EBS, GCE PD, etc.) له معاملات مختلفة
-    
-
-```
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: fast-ssd
-provisioner: kubernetes.io/aws-ebs  # موفر التخزين
-parameters:
-  type: gp3
-  fsType: ext4
-  iops: "10000"
-  throughput: "500"
-reclaimPolicy: Retain  # أو Delete
-allowVolumeExpansion: true  # يسمح بتوسعة الحجم
-volumeBindingMode: WaitForFirstConsumer
-```
-### Dynamic Provisioning
-
-- إنشاء الـ PVs تلقائياً عند إنشاء الـ PVCs
-    
-- يلغي الحاجة إلى إنشاء الـ PVs يدوياً
-    
-- يعتمد على الـ StorageClass المحدد في الـ PVC
-```
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: dynamic-pvc
-spec:
-  storageClassName: fast-ssd  # يشير إلى StorageClass
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 5Gi
-```
----
-
-## CSI (Container Storage Interface)
-
-### ما هو CSI؟
-
-- معيار مفتوح يسمح لأنظمة التخزين بالتكامل مع أنظمة orchstration مثل كوبرنيتيس
-- يفصل منطق التخزين عن نواة كوبرنيتيس
-- يسمح لمزودي التخزين بتطوير مشغلات (drivers) دون الحاجة إلى تعديل كود كوبرنيتيس الأساسي
-
-### مكونات CSI:
-
-1. **CSI Driver**: برنامج يتكامل مع نظام التخزين الخارجي
-2. **Node Plugin**: يعمل على كل node ويدعم عمليات mount/unmount
-3. **Controller Plugin**: يعمل في الـ control plane ويدعم إنشاء/حذف الـ volumes
-
-### مثال استخدام CSI مع AWS EBS:
-
-```
-apiVersion: storage.k8s.io/v1
-kind: StorageClass
-metadata:
-  name: ebs-sc
-provisioner: ebs.csi.aws.com  # موفر CSI
-parameters:
-  type: gp3
-  encrypted: "true"
-  kmsKeyId: arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-```
-### فوائد CSI:
-
-- دعم لأنظمة تخزين أحدث دون انتظار تحديثات كوبرنيتيس
-- تطوير مستقل لمشغلات التخزين
-- دعم ميزات متقدمة مثل التصوير (snapshots)، الاستنساخ (cloning)، والتوسعة (expansion)
 
 ---
 
