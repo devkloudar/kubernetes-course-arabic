@@ -6,7 +6,7 @@ spec:
   containers:
     - name: app-container
       image: busybox
-      command: ["sh", "-c", "cat /etc/config/config.properties && sleep 3600"]
+      command: ["sh", "-c", "cat /etc/config/app.conf && sleep 3600"]
       volumeMounts:
         - name: config-volume
           mountPath: /etc/config

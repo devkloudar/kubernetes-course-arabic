@@ -13,7 +13,7 @@ spec:
         for i in 1 2 3 4 5; do
           echo "File $i" > /data/file-$i.txt;
         done
-        echo "📁 Created 5 files!";
+        echo " Created 5 files!";
     volumeMounts:
     - name: data-volume
       mountPath: /data
@@ -24,7 +24,7 @@ spec:
     command: ['sh', '-c']
     args:
       - |
-        echo "📊 Number of files: $(ls -la /data | grep .txt | wc -l)";
+        echo " Number of files: $(ls -la /data | grep .txt | wc -l)";
         sleep 3600;
     volumeMounts:
     - name: data-volume

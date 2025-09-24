@@ -10,11 +10,11 @@ spec:
     command: ['sh', '-c']
     args:
       - |
-        echo "⏳ waiting for Google to be reachable...";
+        echo "waiting for Google to be reachable...";
         until ping -c1 google.com; do
           sleep 2;
         done;
-        echo "✅ Google is reachable!";
+        echo "Google is reachable!";
 
   containers:
   - name: main-app

@@ -1,0 +1,2 @@
+APP_MODE=dev
+API_URL=https://api-dev.example.com
