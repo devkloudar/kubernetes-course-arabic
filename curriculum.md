@@ -129,10 +129,20 @@
 - Headless Services  
 - العرض العملي  
 - مصادر خطة الدراسة  
-  
 
 
-## الفصل 11: التخزين (Volumes & Storage)
+
+## الفصل 11: Ingress
+- نظرة عامة على الوحدة  
+- مفهوم Ingress Controller  
+- إعداد NGINX Ingress Controller  
+- تعريف قواعد Ingress (Host, Path)  
+- TLS وإدارة الشهادات  
+- العرض العملي  
+- مصادر خطة الدراسة
+
+
+   ## الفصل 12: التخزين (Volumes & Storage)
 - نظرة عامة على الوحدة  
 - أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)  
 - Persistent Volume (PV) و Persistent Volume Claim (PVC)  
@@ -141,13 +151,3 @@
 - العرض العملي  
 - مصادر خطة الدراسة  
 
-
-
-## الفصل 12: Ingress
-- نظرة عامة على الوحدة  
-- مفهوم Ingress Controller  
-- إعداد NGINX Ingress Controller  
-- تعريف قواعد Ingress (Host, Path)  
-- TLS وإدارة الشهادات  
-- العرض العملي  
-- مصادر خطة الدراسة  
