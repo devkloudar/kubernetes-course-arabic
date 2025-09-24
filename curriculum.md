@@ -119,7 +119,8 @@
 - العرض العملي  
 - مصادر خطة الدراسة
 
-- 
+
+ 
 ## الفصل 10: الـ Services
 - نظرة عامة على الوحدة  
 - ClusterIP  
@@ -129,7 +130,6 @@
 - Headless Services  
 - العرض العملي  
 - مصادر خطة الدراسة  
-
 
 
 
@@ -144,7 +144,7 @@
 
 
 
-   ## الفصل 12: التخزين (Volumes & Storage)
+## الفصل 12: التخزين (Volumes & Storage)
 - نظرة عامة على الوحدة  
 - أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)  
 - Persistent Volume (PV) و Persistent Volume Claim (PVC)  
