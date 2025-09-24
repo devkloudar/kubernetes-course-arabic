@@ -117,28 +117,27 @@
 - ربط الـ Secrets مع الـ Pods  
 - أفضل الممارسات (RBAC، CSI، External Secrets)  
 - العرض العملي  
-- مصادر خطة الدراسة  
+- مصادر خطة الدراسة
 
-
-
-## الفصل 10: التخزين (Volumes & Storage)
-- نظرة عامة على الوحدة  
-- أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)  
-- Persistent Volume (PV) و Persistent Volume Claim (PVC)  
-- StorageClass و Dynamic Provisioning  
-- CSI (Container Storage Interface)  
-- العرض العملي  
-- مصادر خطة الدراسة  
-
-
-
-## الفصل 11: الـ Services
+- 
+## الفصل 10: الـ Services
 - نظرة عامة على الوحدة  
 - ClusterIP  
 - NodePort  
 - LoadBalancer  
 - ExternalName  
 - Headless Services  
+- العرض العملي  
+- مصادر خطة الدراسة  
+  
+
+
+## الفصل 11: التخزين (Volumes & Storage)
+- نظرة عامة على الوحدة  
+- أنواع الـ Volumes (emptyDir, hostPath, configMap, secret)  
+- Persistent Volume (PV) و Persistent Volume Claim (PVC)  
+- StorageClass و Dynamic Provisioning  
+- CSI (Container Storage Interface)  
 - العرض العملي  
 - مصادر خطة الدراسة  
 
