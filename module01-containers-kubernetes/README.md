@@ -539,7 +539,6 @@ Kubernetes لا يشغّل الحاويات بنفسه، بل يحتاج إلى 
 
 ###  مقالات و توثيق رسمي
 - [Docker Overview](https://docs.docker.com/get-started/overview/) – مقدمة رسمية من Docker.
-- [Containers 101 – Red Hat](https://www.redhat.com/en/topics/containers/what-is-a-linux-container) – مقال مفصل من Red Hat.
 - [Kubernetes Basics – Official Docs](https://kubernetes.io/docs/tutorials/kubernetes-basics/) – الوحدة الأولى من سلسلة التعليم الرسمية لـ Kubernetes.
 - [Microservices – Martin Fowler](https://martinfowler.com/articles/microservices.html) – مرجع كلاسيكي لفهم فلسفة Microservices.
 
