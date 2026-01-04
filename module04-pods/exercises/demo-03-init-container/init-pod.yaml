@@ -1,0 +1,13 @@
+# init-pod.yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: init-pod
+spec:
+  initContainers:
+  - name: init-pod
+    image: busybox
+    command: ["sh", "-c", "echo Initializing...; sleep 5"]
+  containers:
+  - name: app
+    image: nginx
